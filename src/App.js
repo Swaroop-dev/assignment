@@ -24,13 +24,14 @@ const App=()=>{
     )
     .then(res=>res.json())
       .then((data1)=>{
-        console.log(data1)
+        
         if(data1?.message){
-          console.log(data1.message)
           setError({isError:"true",errormessage:data1.message})
         }
         else {
-          setData([...data,data1])
+          
+          setData(data1)
+          console.log(data)
           }
       })
       .catch((err) => console.log(err))
@@ -39,27 +40,23 @@ const App=()=>{
   },[])
 
   const errorMessage=()=>{
-    return(
-      <div>
-        <h1>{error.errormessage}</h1>
-      </div>
-    )
+    if (error.isError){
+      return(
+        <div>
+          <h1>{error.errormessage}</h1>
+        </div>
+      )
+    }
   }
 
-  const dataMessage=()=>{
-    data.forEach((d)=>{
-      return(
-        <li>
-          {d.awbno}
-        </li>
-      )
-    })
-  }
+
 
 
   return(
     <div>
-      {error.isError?errorMessage():dataMessage()}
+                  
+    { data.map((dat,index)=><p key={index}>{dat.awbno}</p>)} 
+    {errorMessage()}
     </div>
   )
 
