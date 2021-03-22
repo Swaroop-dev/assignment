@@ -3,7 +3,7 @@
 }
 
 .App-logo {
-  height: 40vmin;
+  height: 4vmin;
   pointer-events: none;
 }
 
@@ -31,8 +31,35 @@
 
 
 .classGrid{
-  margin:0 2% 0 2% !important
+  margin:0 2% 2% 2% !important
   
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: white;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color:aliceblue;
+}
+
+.active {
+  background-color:aliceblue;
 }
 
 .classGrid1{

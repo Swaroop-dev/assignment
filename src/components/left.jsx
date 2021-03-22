@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import LinearProgress from '@material-ui/core/LinearProgress';
+import  './left.css'
 
 const useStyles = makeStyles({
   root: {
@@ -11,7 +12,6 @@ const useStyles = makeStyles({
 const Left=({events})=>{
 
 
-  const classes = useStyles();
   const [progress, setProgress] = React.useState(0);
   const [buffer, setBuffer] = React.useState(10);
 
@@ -49,9 +49,11 @@ const Left=({events})=>{
 
 
   return (
-    <div className={classes.root}>
-      <LinearProgress variant="buffer" value={progress} valueBuffer={buffer} />
-      {events.scan.map((s)=><p>{s.to}{s.location}{s.status_detail}</p>)}
+    <div className="col-5 col-offset-3">
+      <div className="progress-bar">
+      <LinearProgress variant="buffer" value={progress} valueBuffer={buffer}  />
+      {events.scan.map((s)=><tr><td>{s.to}</td><td>{s.location}</td><td>{s.status_detail}</td><td>{s.time}</td></tr>)}
+    </div>
     </div>
   );
 }
