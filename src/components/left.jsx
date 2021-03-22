@@ -11,7 +11,6 @@ const useStyles = makeStyles({
 const Left=({events})=>{
 
 
-
   const classes = useStyles();
   const [progress, setProgress] = React.useState(0);
   const [buffer, setBuffer] = React.useState(10);
@@ -46,27 +45,13 @@ const Left=({events})=>{
   
 
 
-  const ifDisplay=(events)=>{
-    
-    
-    if (events!=undefined){
-      const {scan}=events;
-      console.log(scan)
-      return(scan.forEach((scans)=><p>{scans.time}{scans.status_detail}{scans.location}</p>))
-      // console.log(events)
-      // return <p>hello</p>
-    }    
-  }
-  if (events==undefined){
-    console.log(events)
-    return <p>not data</p>
-  }
+
 
 
   return (
     <div className={classes.root}>
       <LinearProgress variant="buffer" value={progress} valueBuffer={buffer} />
-      {ifDisplay()}
+      {events.scan.map((s)=><p>{s.to}{s.location}{s.status_detail}</p>)}
     </div>
   );
 }
