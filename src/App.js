@@ -99,7 +99,7 @@ const App=()=>{
   
   
   const [data,setData]=useState([])
-  const [Awbno,setAwbno]=useState()
+  const [Awbno,setAwbno]=useState("")
   const [error,setError]=useState({isError:"false",errormessage:""})
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
@@ -376,15 +376,14 @@ const App=()=>{
         </Grid>
       </div>
     <FormControl >
-             <NativeSelect default=" " onChange={(e)=>setAwbno(e.target.value)}>
+             <NativeSelect default="" onChange={(e)=>setAwbno(e.target.value)}>
                  <option value="">global</option>
     {data.map((dat1,index)=><option value={dat1.awbno} key={index}>{dat1.awbno}</option>)} 
              </NativeSelect>
          </FormControl>
 
 
-    {Awbno=="" &&<Right data1={data} />}
-    {Awbno!="" &&<div> <Right data1={data.filter((d)=>d.awbno==Awbno)}/>  </div>}
+    {Awbno==""?<Right data1={data} />:<div> <Right data1={data.filter((d)=>d.awbno==Awbno)}/> <Left events={data.filter((d)=>d.awbno==Awbno)[0]}/>  </div>}
     </div>
     </div>
   )
