@@ -28,6 +28,7 @@ const App=()=>{
   const [data,setData]=useState([])
   const [Awbno,setAwbno]=useState("")
   const [error,setError]=useState({isError:"false",errormessage:""})
+  const [cur_status,setcur_status]=useState("DEL")
   
 
   
@@ -88,7 +89,7 @@ const App=()=>{
           <div>
         <Grid container spacing={3} justify="center" className="classGrid1" >
           <Grid item component={Card} xs={3} md={1} className="classGrid">
-          <Button>
+          <Button onClick={()=>setcur_status("DEX")}>
             <CardContent>
               
               <Typography variant="h5">
@@ -106,7 +107,7 @@ const App=()=>{
             </Button>
           </Grid>
            <Grid item component={Card} xs={3} md={1} className="classGrid" >
-           <Button>
+           <Button onClick={()=>setcur_status("INL")}>
             <CardContent>
               <Typography variant="h5">
               <Countup
@@ -121,7 +122,7 @@ const App=()=>{
             </Button>
           </Grid>
           <Grid item component={Card} xs={3} md={1} className="classGrid" >
-            <Button>
+            <Button onClick={()=>setcur_status("DEL")}>
             <CardContent>
   
               <Typography variant="h5">
@@ -137,7 +138,7 @@ const App=()=>{
             </Button>
           </Grid> 
           <Grid item component={Card} xs={3} md={1} className="classGrid" >
-            <Button>
+            <Button onClick={()=>setcur_status("OOD")}>
             <CardContent>
   
               <Typography variant="h5">
@@ -154,7 +155,7 @@ const App=()=>{
             </Button>
           </Grid> 
           <Grid item component={Card} xs={3} md={1} className="classGrid" >
-            <Button>
+            <Button onClick={()=>setcur_status("NFI")}>
             <CardContent>
   
               <Typography variant="h5">
@@ -204,7 +205,7 @@ const App=()=>{
         </Grid>
       </Grid>
 
-    {Awbno==""?<Right data1={data} />:<div> <Right data1={data.filter((d)=>d.awbno==Awbno)}/> <Left events={data.filter((d)=>d.awbno==Awbno)[0]}/>
+    {Awbno==""?<Right data1={data.filter((d)=>d.current_status_code===cur_status)} />:<div> <Right data1={data.filter((d)=>(d.awbno==Awbno && d.current_status_code===cur_status))}/> <Left events={data.filter((d)=>d.awbno==Awbno)[0]}/>
       </div>}
       </th>
       </table>

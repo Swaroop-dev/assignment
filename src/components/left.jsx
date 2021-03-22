@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import  './left.css'
+import {Grid} from '@material-ui/core'
 
 const useStyles = makeStyles({
   root: {
@@ -49,12 +50,13 @@ const Left=({events})=>{
 
 
   return (
-    <div className="col-5 col-offset-3">
+    <Grid>
       <div className="progress-bar">
       <LinearProgress variant="buffer" value={progress} valueBuffer={buffer}  />
       {events.scan.map((s)=><tr><td>{s.to}</td><td>{s.location}</td><td>{s.status_detail}</td><td>{s.time}</td></tr>)}
     </div>
-    </div>
+    </Grid>
+    
   );
 }
 
