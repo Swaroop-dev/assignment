@@ -8,7 +8,8 @@ const useStyles = makeStyles({
   },
 });
 
-export const Left=()=>{
+const Left=({events})=>{
+  console.log(events)
   const classes = useStyles();
   const [progress, setProgress] = React.useState(0);
   const [buffer, setBuffer] = React.useState(10);
@@ -28,6 +29,8 @@ export const Left=()=>{
     };
   });
 
+
+
   React.useEffect(() => {
     const timer = setInterval(() => {
       progressRef.current();
@@ -40,7 +43,10 @@ export const Left=()=>{
 
   return (
     <div className={classes.root}>
+      {/* {events.scan.map((event)=><p>{event.time}{event.location}{event.status_detail}</p>)} */}
       <LinearProgress variant="buffer" value={progress} valueBuffer={buffer} />
     </div>
   );
 }
+
+export default Left

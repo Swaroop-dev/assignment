@@ -1,9 +1,15 @@
 
-import './App.css';
+import  './App.css';
 import {useEffect,useState} from 'react';
 import React from "react-dom";
-import {NativeSelect,FormControl} from '@material-ui/core'
-
+import {NativeSelect,FormControl} from '@material-ui/core';
+import Left from './components/left.jsx';
+import Right from './components/right.jsx';
+import { Card,
+  CardContent,
+  Grid
+ } from '@material-ui/core';
+import  Countup from "react-countup";
 
 
 import{ fade, makeStyles } from '@material-ui/core/styles';
@@ -93,7 +99,7 @@ const App=()=>{
   
   
   const [data,setData]=useState([])
-  const [Awbno,setAwbno]=useState('')
+  const [Awbno,setAwbno]=useState()
   const [error,setError]=useState({isError:"false",errormessage:""})
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
@@ -294,28 +300,91 @@ const App=()=>{
     </div>
   
     <div>
-    <ol>
-      <li>{data.filter((dat)=>dat.current_status_code==="OOD").length}
-    </li>
-      <li>{data.filter((dat)=>dat.current_status_code==="DEL").length}
-    </li>
-      <li>{data.filter((dat)=>dat.current_status_code==="INL").length}
-    </li>
-      <li>{data.filter((dat)=>dat.current_status_code==="NFI").length}
-    </li>
-      <li>{data.filter((dat)=>dat.current_status_code==="DEX").length}
-    </li>
-    </ol>
-    {/* <right data={data}/> */}
+          <div>
+        <Grid container spacing={3} justify="center" className="classGrid1" >
+          <Grid item component={Card} xs={3} md={1} className="classGrid">
+            <CardContent>
+              
+              <Typography variant="h5">
+                <Countup
+                start={0}
+                end={data.filter((dat)=>dat.current_status_code==="DEX").length}
+                duration={2.5}
+                separator=","
+                />
+              </Typography>
+              
+              <Typography variant="body2">DEX</Typography>
+            </CardContent>
+          </Grid>
+           <Grid item component={Card} xs={3} md={1} className="classGrid" >
+            <CardContent>
+              <Typography variant="h5">
+              <Countup
+                start={0}
+                end={data.filter((dat)=>dat.current_status_code==="INL").length}
+                duration={2.5}
+                separator=","
+                />
+              </Typography>
+              <Typography variant="body2">INT</Typography>
+            </CardContent>
+          </Grid>
+          <Grid item component={Card} xs={3} md={1} className="classGrid" >
+            <CardContent>
+  
+              <Typography variant="h5">
+              <Countup
+                start={0}
+                end={data.filter((dat)=>dat.current_status_code==="DEL").length}
+                duration={2.5}
+                separator=","
+                />
+              </Typography>
+              <Typography variant="body2">DEL</Typography>
+            </CardContent>
+          </Grid> 
+          <Grid item component={Card} xs={3} md={1} className="classGrid" >
+            <CardContent>
+  
+              <Typography variant="h5">
+              <Countup
+                start={0}
+                end={data.filter((dat)=>dat.current_status_code==="OOD").length}
+                duration={2.5}
+                separator=","
+                />
+              </Typography>
+             
+              <Typography variant="body2">OOD</Typography>
+            </CardContent>
+          </Grid> 
+          <Grid item component={Card} xs={3} md={1} className="classGrid" >
+            <CardContent>
+  
+              <Typography variant="h5">
+              <Countup
+                start={0}
+                end={data.filter((dat)=>dat.current_status_code==="NFI").length}
+                duration={2.5}
+                separator=","
+                />
+              </Typography>
+              <Typography variant="body2">NFI</Typography>
+            </CardContent>
+          </Grid> 
+        </Grid>
+      </div>
     <FormControl >
-             <NativeSelect default="" onChange={(e)=>setAwbno(e.target.value)}>
+             <NativeSelect default=" " onChange={(e)=>setAwbno(e.target.value)}>
                  <option value="">global</option>
     {data.map((dat1,index)=><option value={dat1.awbno} key={index}>{dat1.awbno}</option>)} 
              </NativeSelect>
          </FormControl>
 
-    {data.map((dat,index)=><p key={index}>{dat.awbno}{dat.carrier}{dat.from}{dat.to}{dat.current_status}</p>)} 
-    {errorMessage()}
+
+    {Awbno=="" &&<Right data1={data} />}
+    {Awbno!="" &&<div> <Right data1={data.filter((d)=>d.awbno==Awbno)}/>  </div>}
     </div>
     </div>
   )
